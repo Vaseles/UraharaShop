@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,5 +38,15 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('categories', [CategoryController::class, 'create']);
         Route::delete('categories/{name}/', [CategoryController::class, 'delete']);  
+    });
+
+    //! PRODUCT
+    Route::get('products', [ProductController::class, 'index']);
+    Route::get('products/{slug}/', [ProductController::class,'show']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('products', [ProductController::class, 'create']);
+        Route::put('products/{slug}/', [ProductController::class, 'update']);
+        Route::delete('products/{slug}/', [ProductController::class, 'delete']);
     });
 });
