@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -48,5 +49,16 @@ Route::prefix('v1')->group(function () {
         Route::post('products', [ProductController::class, 'create']);
         Route::put('products/{slug}/', [ProductController::class, 'update']);
         Route::delete('products/{slug}/', [ProductController::class, 'delete']);
+    });
+
+    //! COMMENTS
+    Route::get('products/{slug}/comments', [CommentController::class, 'index']);
+    Route::get('products/{slug}/comments/{id}/', [CommentController::class, 'show']);
+    
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('products/{slug}/comments', [CommentController::class, 'create']);
+        Route::delete('products/{slug}/comments/{id}/', [CommentController::class, 'delete']);
+        Route::put('products/{slug}/comments/{id}/', [CommentController::class, 'update']);
+
     });
 });
