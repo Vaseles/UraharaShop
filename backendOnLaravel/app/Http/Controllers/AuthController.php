@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
 {
@@ -80,7 +81,8 @@ class AuthController extends Controller
         if ($user) {
             return response([
                'status' =>'success',
-                'user' => $user
+                'user' => new UserResource($user),
+                // 'user' => ($user)
             ]);
         } 
         return response([

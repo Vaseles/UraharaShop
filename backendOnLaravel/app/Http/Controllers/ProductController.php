@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class ProductController extends Controller
 {
     public function index() {
         return response([
-            'products' => Product::all(), //! SHOW ALL PRODUCTS
+            'products' => ProductResource::collection(Product::all()), //! SHOW ALL PRODUCTS
         ]);
     }
     public function create(ProductRequest $request) { //! CREATE 
@@ -48,6 +49,7 @@ class ProductController extends Controller
         $image->move($path, $imageName);
 
         return response([
+            'status' => 'success',
             'product' => $product,
         ]);
     }
@@ -57,7 +59,7 @@ class ProductController extends Controller
 
         if ($product) {
             return response([
-                'product' => $product,
+                'product' => new ProductResource($product),
             ]);
         }
 

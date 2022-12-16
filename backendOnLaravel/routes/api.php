@@ -55,7 +55,7 @@ Route::prefix('v1')->group(function () {
     Route::get('products/{slug}/comments', [CommentController::class, 'index']);
     Route::get('products/{slug}/comments/{id}/', [CommentController::class, 'show']);
     
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth:sanctum')->group(   function () {
         Route::post('products/{slug}/comments', [CommentController::class, 'create']);
         Route::delete('products/{slug}/comments/{id}/', [CommentController::class, 'delete']);
         Route::put('products/{slug}/comments/{id}/', [CommentController::class, 'update']);

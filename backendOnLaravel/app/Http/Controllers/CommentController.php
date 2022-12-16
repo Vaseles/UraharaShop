@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CommentController extends Controller
 {
     public function index($slug) {
         $product = Product::where('slug', $slug)->first();
-        $comments = Comment::where('product_id', $product->id)->first();
+        $comments = Comment::where('product_id', $product->id)->get();
         
         if ($product) {
             return response([
-                'comments' => $comments,
+                'comments' => CommentResource::collection( $comments),
             ]);
         }
 
@@ -73,7 +75,7 @@ class CommentController extends Controller
         if ($product) {
             if ($comment) {
                 return response([
-                    'comments' => $comment,
+                    'comments' => new CommentResource($comment),
                 ]);
             }
             return response([
