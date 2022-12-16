@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,12 @@ Route::prefix('v1')->group(function () {
         Route::delete('user/{name}/', [AuthController::class, 'destroyAccount']);
     });
 
-    //! Tags
+    //! CATEGORY
+    Route::get('categories', [CategoryController::class, 'index']);
+    Route::get('categories/{name}/', [CategoryController::class, 'show']);
+    
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('categories', [CategoryController::class, 'create']);
+        Route::delete('categories/{name}/', [CategoryController::class, 'delete']);  
+    });
 });
