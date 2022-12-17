@@ -12,11 +12,51 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+        // $paginator = Product::paginate(10); //! PAGINATOR
+        // return response([
+        //     'page' => $paginator->currentPage(),
+        //     'pageElementsCount' => $paginator->count(),
+        //     'productsCount' => Product::count(),
+        //     'products' => ProductResource::collection($paginator->items()), 
+        // ]);
+
+        $sortField = 'title';
+        $sortReverse = 'asc';
+
+        //! SORT REVERSE 
+        if ($request->sortDesc == 'desc') {
+            $sortReverse = 'desc';
+        }
+        //! SORT FIELD(TITLE/CATEGORY/price/created/raiting/price/user)
+        if ($request->sortField == 'category') {
+            $sortField = 'category';
+        }
+        if ($request->sortField == 'price') {
+            $sortField = 'price';
+        }
+        if ($request->sortField == 'desc') {
+            $sortField = 'description';
+        }
+        if ($request->sortField == 'created') {
+            $sortField = 'created';
+        }
+        if ($request->sortField == 'raiting') {
+            $sortField = 'raiting';
+        }
+        if ($request->sortField == 'user') {
+            $sortField = 'user';
+        }
+        
+        $products = Product::orderBy($sortField, $sortReverse)->get();
+
         return response([
-            'products' => ProductResource::collection(Product::all()), //! SHOW ALL PRODUCTS
+            'productsCount' => Product::count(),
+            // 'products' => ProductResource::collection(Product::all()),
+            'products' => ProductResource::collection($products),
         ]);
     }
+
     public function create(ProductRequest $request) { //! CREATE 
         $request->validated($request->all());
 

@@ -23,7 +23,7 @@ class ProductResource extends JsonResource
             'image' => '/files/products/'.$this->title.'/'.$this->image,
             'description' => $this->description,
 
-            'user_id' => $this->user->name,
+            'user' => $this->user->name,
             'category' => $this->category->name,
 
             'raiting' => $raiting,
