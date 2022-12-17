@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Requests\OrderRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +61,14 @@ Route::prefix('v1')->group(function () {
         Route::post('products/{slug}/comments', [CommentController::class, 'create']);
         Route::delete('products/{slug}/comments/{id}/', [CommentController::class, 'delete']);
         Route::put('products/{slug}/comments/{id}/', [CommentController::class, 'update']);
+    });
 
+    //! ORDER
+    Route::middleware('auth:sanctum')->group(   function () {
+        Route::get('user/{name}/orders', [OrderController::class, 'index']);
+        Route::post('products/{slug}/orders', [OrderController::class, 'create']);
+        Route::get('user/{name}/orders/{id}/', [OrderController::class, 'show']);
+        Route::get('user/{name}/orders/{id}/payment', [OrderController::class, 'paid']);
+        Route::get('user/{name}/orders/{id}/deliver', [OrderController::class, 'deliver']);
     });
 });

@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constraint('users')->onDelete('cascade');
             $table->foreignId('product_id')->constraint('products')->onDelete('cascade');
 
+            $table->string('phone');
             $table->string('count');
 
             $table->string('country');

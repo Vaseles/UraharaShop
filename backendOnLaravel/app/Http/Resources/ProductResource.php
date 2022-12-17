@@ -28,7 +28,7 @@ class ProductResource extends JsonResource
 
             'raiting' => $raiting,
             'count' => $this->count,
-            'price' => $this->price,
+            'price' => $this->price.'$',
             'created' => $this->created_at->format('Y-m-d H:i:s'),
             'updated' => $this->updated_at->format('Y-m-d H:i:s'),
 
