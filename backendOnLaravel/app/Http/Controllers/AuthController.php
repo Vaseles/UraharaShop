@@ -23,7 +23,7 @@ class AuthController extends Controller
             return response([
                 'status' => 'error',
                 'message' => 'email not found, because email has been taked'
-            ]);
+            ], 403);
         }
 
         $user = User::create([ //! Add New User
@@ -39,6 +39,7 @@ class AuthController extends Controller
 
         return response([ //! ENTER MESSAGE & TOKEN
             'status' => 'success',
+            'user' => $user,
             'token' => $user->createToken($user->name)->plainTextToken,
         ]);
     }
@@ -50,20 +51,21 @@ class AuthController extends Controller
             return response([
                 'status' => 'error',
                 'message' => 'email not found'
-            ]);
+            ],403);
         }
 
         if (!Auth::attempt($request->only('email', 'password'))) { //! CHECK PASSWORD
             return response([
                 'status' => 'error',
                 'message' => 'password not found'
-            ]);
+            ],403);
         }
 
         $user = User::where('email', $request->email)->first();
 
         return response([ //! ENTER MESSAGE & TOKEN
             'status' => 'success',
+            'user' => $user,
             'token' => $user->createToken($user->name)->plainTextToken,
         ]);
     }
@@ -88,7 +90,7 @@ class AuthController extends Controller
         return response([
            'status' =>'error',
           'message' => 'user not found'
-        ]);
+        ],404);
     }
 
     public function changeUser(UserRequest $request, $name) {
@@ -126,17 +128,17 @@ class AuthController extends Controller
 
                 return response([
                     'status' => 'success',
-                ]);
+                ],200);
             } 
             return response([
                 'status' => 'error',
                 'message' => "U don't have root for change this user"
-            ]);
+            ],403);
         } 
         return response([
            'status' =>'error',
           'message' => 'user not found'
-        ]);
+        ], 404);
     }
     public function destroyAccount($name) {
         $Authuser = Auth::user(); //! get Logged User
@@ -153,11 +155,11 @@ class AuthController extends Controller
             return response([ //! error
                 'status' => 'error',
                 'message' => "U don't have root for change this user"
-            ]);
+            ],403);
         } 
         return response([
            'status' =>'error',
           'message' => 'user not found'
-        ]);
+        ], 404);
     }
 }

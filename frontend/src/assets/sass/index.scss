@@ -1,0 +1,160 @@
+@import 'varibles.scss';
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: $white;
+    border: none;
+    transition: all .25s linear;
+    outline: none;
+    text-decoration: none;
+    background-color: transparent;
+}
+body {
+    background-color: $black;
+    color: $white;
+    font-size: 1.2rem;
+    font-family: $Oswald;
+    overflow-x: hidden;
+}
+
+//TODO: SCROLLBAR
+::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: $gold;
+    border-radius: 10px;
+}
+
+//TODO: HEADER
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 5%;
+    height: 60px;
+    background-color: $black;
+
+    .header__logo, .header__menu {
+        display: flex;
+        justify-content: center;
+        align-items:  center;
+        gap: .4rem;
+        
+        .icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        span {
+            text-transform: uppercase;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.link { 
+    font-size: 1.2rem;
+    padding: 0 .4rem;
+    &:hover {
+        color: $gold;
+    }
+}
+.btn {
+    padding: .4rem .8rem;
+    border: 2px solid aliceblue;
+    font-family: $Oswald;
+    &:hover {
+        color: $gold;
+        border-color: $gold;
+    }
+}
+
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .page__f {
+        max-width: 540px;
+        border: 2px solid $gold;
+        box-shadow: 5px 5px 1px $gold;
+
+        h1 {
+            font-size: 1.6rem;
+        }
+    }
+    .page__item {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 2% 4%;
+        max-width: 500px;
+        width: 100%;
+        margin: 5% 0;
+        .page__form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5% 0;
+            flex-direction: column;
+            width: 100%;
+        }
+    }
+    .page__buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+}
+
+//TODO: INPUT FORM
+.input__form {
+    position: relative;
+    margin: .5rem 0;
+    width: 100%;    
+    .input__text {
+        position: absolute;
+        background-color: $black;
+        top: -1rem;
+        left: .6rem;
+        padding: .1rem .2rem;
+        z-index: 1;
+    }
+}
+input {
+    border: 2px solid $white;
+    padding: .6rem .6rem;
+    font-size: 1.3rem;
+    position: relative;
+    width: 100%;
+    font-family: $Oswald;
+    &:hover {
+        border-color: $gold;
+        color: $gold
+    }
+    &:focus {
+        border-color: $gold;
+        color: $gold
+    }
+}
+
+//TODO: Error
+.error {
+    background-color: $darkBrown;
+    color: $gold;
+    margin: 0% 0 4%;
+    padding: 2%;
+    width: 100%;
+}
+button {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    cursor: pointer;
+}
