@@ -33,6 +33,7 @@ class ProductResource extends JsonResource
             'updated' => $this->updated_at->format('Y-m-d H:i:s'),
 
             'comments' => CommentResource::collection($this->comments),
+            // 'comments' => $this->comments,
             'oreders' => $this->oreders,
         ];
     }

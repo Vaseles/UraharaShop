@@ -24,29 +24,29 @@ class ProductController extends Controller
         $sortField = 'title';
         $sortReverse = 'asc';
 
-        //! SORT REVERSE 
-        if ($request->sortDesc == 'desc') {
-            $sortReverse = 'desc';
-        }
-        //! SORT FIELD(TITLE/CATEGORY/price/created/raiting/price/user)
-        if ($request->sortField == 'category') {
-            $sortField = 'category';
-        }
-        if ($request->sortField == 'price') {
-            $sortField = 'price';
-        }
-        if ($request->sortField == 'desc') {
-            $sortField = 'description';
-        }
-        if ($request->sortField == 'created') {
-            $sortField = 'created';
-        }
-        if ($request->sortField == 'raiting') {
-            $sortField = 'raiting';
-        }
-        if ($request->sortField == 'user') {
-            $sortField = 'user';
-        }
+        // //! SORT REVERSE 
+        // if ($request->sortDesc == 'desc') {
+        //     $sortReverse = 'desc';
+        // }
+        // //! SORT FIELD(TITLE/CATEGORY/price/created/raiting/price/user)
+        // if ($request->sortField == 'category') {
+        //     $sortField = 'category';
+        // }
+        // if ($request->sortField == 'price') {
+        //     $sortField = 'price';
+        // }
+        // if ($request->sortField == 'desc') {
+        //     $sortField = 'description';
+        // }
+        // if ($request->sortField == 'created') {
+        //     $sortField = 'created';
+        // }
+        // if ($request->sortField == 'raiting') {
+        //     $sortField = 'raiting';
+        // }
+        // if ($request->sortField == 'user') {
+        //     $sortField = 'user';
+        // }
         
         $products = Product::orderBy($sortField, $sortReverse)->get();
 

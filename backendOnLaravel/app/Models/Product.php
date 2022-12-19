@@ -14,7 +14,7 @@ class Product extends Model
     public function category() { //?: SHOW CATEGORY
         return $this->belongsTo(Category::class);
     }
-    public function user() { //?: SHOW USER
+    public function user() { 
         return $this->belongsTo(User::class);
     }
     public function comments() { //?: SHOW COMMENTS
